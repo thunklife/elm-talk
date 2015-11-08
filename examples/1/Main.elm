@@ -52,46 +52,72 @@ update action model =
 
 pageHeader : Html
 pageHeader =
-  h2 [] [ text "Elm HTML Example" ]
+  h1 [ class "mui--text-display3"]
+     [ text "Elm HTML Example" ]
 
 currentValue : Int -> Html
 currentValue value =
   let
     valueText = "The current value is: " ++ (toString value)
   in
-    span [] [ text valueText ]
+    h3 [] [ text valueText ]
 
 counterButtons : Address Action -> Html
 counterButtons address =
   div []
-      [ button [ onClick address Increment ] [ text "+"]
-      , button [ onClick address Decrement ] [ text "-"]
+      [ button [ onClick address Decrement
+               , class buttonClasses
+               ]
+               [ text "-"]
+      , button [ onClick address Increment
+               , class buttonClasses
+               ]
+               [ text "+"]
       ]
+
+buttonClasses : String 
+buttonClasses = "mui-btn mui-btn--raised mui-btn--primary"
 
 resetButtons : Address Action -> Html
 resetButtons address =
-  div []
-      [ button [onClick address ResetValue]
-               [ text "Reset" ]
-      , button [onClick address ResetAll]
+  div [ class "mui--clearfix" ]
+      [ button [onClick address ResetAll
+               , class resetButtonClasses
+               , id "reset-all"
+               ]
                [ text "Reset All" ]
+      , button [onClick address ResetValue
+               , class resetButtonClasses
+               , id "reset"
+               ]
+               [ text "Reset" ]
       ]
+
+resetButtonClasses : String
+resetButtonClasses = "mui--pull-right mui-btn mui-btn--raised"
 
 totalOps : Int -> Html
 totalOps value =
   let
     opsText = "Number of operations: " ++ (toString value)
   in
-    span [] [ text opsText ]
+    div [ id "ops"
+        , class "mui--pull-right"
+        ]
+        [ text opsText ]
 
 view : Address Action -> Model -> Html
 view address model =
-  div [ id "container" ]
+  div [ class "mui-container" ]
       [ pageHeader
-      , currentValue model.value
-      , counterButtons address
-      , resetButtons address
-      , totalOps model.opCount
+      , div [ id "container"
+            , class "mui-panel"
+            ]
+            [ currentValue model.value
+            , counterButtons address
+            , resetButtons address
+            , totalOps model.opCount
+            ]
       ]
 
 -- MAIN
