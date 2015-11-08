@@ -233,7 +233,7 @@ True && False
           <section>
             <h2>Functions</h2>
             <p>The Basics (1/3)</p>
-            <pre><code class="elm">
+            <pre><code>
 add x y = x + y
 
 add 10 11 -- 21
@@ -246,7 +246,7 @@ add' = (\x y -> x + y) -- anonymous function
           <section>
             <h2>Functions</h2>
             <p>Pattern Matching (2/3)</p>
-            <pre><code class="elm">
+            <pre><code>
 or b1 b2 =
   case b1 of
     True -> True
@@ -256,7 +256,7 @@ or b1 b2 =
           <section>
             <h2>Functions</h2>
             <p>Let (3/3)</p>
-            <pre><code class="elm">
+            <pre><code>
 f x =
   let
     double = x * 2
@@ -268,7 +268,7 @@ f x =
             <h2>Notes On Functions</h2>
               <p>Operators are just functions; you can create your own</p>
               <p>Functions & operators can be used prefix or infix</p>
-            <pre><code class="elm">
+            <pre><code>
 (<<>>) x y = x + y
 
 3 <<>> 3
@@ -283,7 +283,7 @@ add 3 3
           </section>
           <section>
             <h2>Lists</h2>
-            <pre><code class="elm">
+            <pre><code>
 xs = [1, 2, 3]
 
 4::xs -- [4, 1, 2, 3]
@@ -300,7 +300,7 @@ List.map ((+) 1) xs
           </section>
           <section>
             <h2>Tuples</h2>
-            <pre><code class="elm">
+            <pre><code>
 t = (1, "Foo")
 t' = (2, "Bar", [1, 2, 3])
 
@@ -352,6 +352,12 @@ step Increment (Counter 1) -- Counter 2
 
 step Decrement (Counter 2) -- Counter 1
             </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>This example is fairly trivial, but the point is that each value of a type can carry data</li>
+                <li>The point is they can hold any data</li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h2>Polymorphic Unions</h2>
@@ -370,6 +376,13 @@ head xs =
             <pre><code>
 type Either a b = Left a | Right b
             </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>Sum types can carry data with them, and we can parameterize that data</li>
+                <li>Maybe a isn't a "concrete" type, it's a like a function waiting for an argument</li>
+                <li>Maybe Int & Maybe Char are unique types</li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h2>Records</h2>
@@ -388,6 +401,14 @@ sayHi { first } =
 
 sayHi person -- "Hi Jane"
             </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>Records are like objects / hashes in other languages</li>
+                <li>But records in Elm are far more powerful than, say, objects in JS</li>
+                <li>They are also very similar to n-tuples or a sum type containing various values</li>
+                <li>Records, however, come with accessors (which are just functions), provide a more familiar interface</li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h2>Records</h2>
@@ -401,6 +422,12 @@ sayHi person -- "Hi Jane"
 
 { person - last | surname = "Smith" } -- combine adding & deleting to rename a field
             </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>Important note here, this is not mutation, data is immutable.</li>
+                <li>Each operation creates a new record, using the source as a template</li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h2>Types</h2>
@@ -446,20 +473,46 @@ person : {first : String, last : String}
           </section>
           <section>
             <h2>Types</h2>
-            <p>Functions</p>
+            <p>Functions 1/2</p>
             <pre><code>
 add : Int -> Int -> Int
 add x y = x + y
 
--- because currying
-
-add : Int -> (Int -> Int)
+intMap : (Int -> Int) -> List Int -> List Int
             </code></pre>
             <aside class="notes">
               <ul>
                 <li>The type of a function includes a list of types of arguments, separated by '->'</li>
                 <li>The final type in the signature is the return type</li>
-                <li>Since functions are curried these two signatues are equivalent</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Types</h2>
+            <p>Functions 2/2</p>
+            <pre><code>
+add : Int -> Int -> Int
+
+add3 : Int -> Int -> Int -> Int
+
+List.map : (a -> b) -> List a -> List b
+
+-- Curried Versions
+
+add : Int -> (Int -> Int)
+
+add3 : Int -> (Int -> (Int -> Int))
+
+List.map : (a -> b) -> (List a -> List b)
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>Functions in Elm are curried</li>
+                <li>Each function takes one argument and returns a new function of one argument</li>
+                <li>The paranthesis help illustrate that point. For each argument</li>
+                <li>They also show an interesting way to look at map</li>
+                <li>map is really a function that takes a function which works on a single value</li>
+                <li>And turns it into a function that works on a list of values</li>
               </ul>
             </aside>
           </section>
