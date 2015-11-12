@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Elm – Typed Functional Programming For The Web</title>
+
+    <meta name="description" content="Full Stack San Diego slides">
+    <meta name="author" content="Jesse Williamson">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <link rel="stylesheet" href="css/custom.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/solarized_dark.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+     var link = document.createElement( 'link' );
+     link.rel = 'stylesheet';
+     link.type = 'text/css';
+     link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+     document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Elm</h1>
+          <h6>Typed Functional Programming For The Web</h6>
+          <aside class="notes">
+            <ul>
+              <li>Elm is a language looking to compete to be the next language for the web</li>
+              <li>It's goal is to bring more maintainable development to JavaScript, while being approachable</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <section>
+            <h2>Why Choose Elm?</h2>
+            <aside class="notes">
+              <ul>
+                <li>Of course there are plenty of of options for comile to JS langs</li>
+                <li>So why choose Elm</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Purity</h2>
+            <h6>x → y</h6>
+            <aside class="notes">
+              <ul>
+                <li>Functions operate on inputs only, and have no side effects</li>
+                <li>Functions are referentially transparent, they always return the same output for a given input</li>
+                <li>Effects in Elm are Managed by the runtime, not by your code. Effects are encoded as types (Task)</li>
+                <li>You can tell by looking at the type signature whether or not a function has side effects</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Immutability</h2>
+            <h6 style="text-decoration: line-through"> x = x + 1</h6>
+            <aside class="notes">
+              <ul>
+                <li>All data is immutable, making code easier to think about</li>
+                <li>Immutable data makes code easier to think about</li>
+                <li>You don't have to worry about your data being changed out from under you</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Designed For Frontend</h2>
+            <aside class="notes">
+              <ul>
+                <li>Elm is designed to bring FP to FE devs, not FP devs to the Frontend</li>
+                <li>It eschews concepts that exist in other Functional Langs (like Haskell)</li>
+                <li>Concepts like Signals are key to the language, but pacakges are available to abstract that away</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Tooling</h2>
+            <ul>
+              <li>Elm REPL</li>
+              <li>Elm Make</li>
+              <li>Elm Package Manager</li>
+              <li>Elm Reactor</li>
+            </ul>
+            <aside class="notes">
+              <ul>
+                <li>Elm provides a REPL. Nothing to fancy but it's good for testing things out</li>
+                <li>Elm Make is simple build system</li>
+                <li>Elm Package Manager is a (yet another) package manager. It provides nice installation plan. It enforces SemVer.</li>
+                <li>Elm Reactor provides easy re-compilation (just refresh the page) of a project, hotswapping and a time-traveling debugger (think Brent Victor Inventing On Principle).</li>
+              </ul>
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Elm Syntax</h2>
+            <h6>Crash Course</h6>
+            <aside class="notes">
+              <ul>
+                <li>Elm is an ML style language, like Haskell.</li>
+                <li>It can seem a littl strange at first, so here's a crash course</li>
+              </ul>
+          </section>
+          <section>
+            <h2>Functions</h2>
+            <pre><code>
+add x y = x + y
+
+add 10 11 -- 21
+
+add' = (\x y -> x + y) -- anonymous function
+            </code></pre>
+          </section>
+          <section>
+            <h2>Pattern Matching</h2>
+            <pre><code>
+or b1 b2 =
+  case b1 of
+    True -> True
+    False -> b2
+            </code></pre>
+          </section>
+          <section>
+            <h6>Let...In</h6>
+            <pre><code>
+f x =
+  let
+    double = x * 2
+  in
+    double + double
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>let allows us to assign names to values, or define functions in a limited scope</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Lists</h2>
+            <pre><code>
+xs = [1, 2, 3]
+
+4::xs -- [4, 1, 2, 3]
+
+head xs
+  case xs of
+    x::xs -> Just x
+    []    -> Nothing
+            </code></pre>
+          </section>
+          <section>
+            <h2>Tuples</h2>
+            <pre><code>
+t = (1, "Foo")
+t' = (2, "Bar", [1, 2, 3])
+            </code></pre>
+          </section>
+          <section>
+            <h2>Union Types</h2>
+            <pre><code class="elm">
+type Action =
+  Add
+| Sub
+            </code></pre>
+            <pre><code>
+calc action n m =
+  case action of
+    Add -> n + m
+    Sub -> n - m
+
+calc Add 1 2 -- 3
+
+calc Sub 5 3 -- 2
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>Unions are like enums in other languages, but have more power as we'll see later</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Union Types</h2>
+            <h6>With Values</h6>
+            <pre><code class="elm">
+type Action =
+  Increment
+| Decrement
+
+type Counter = Counter Int
+            </code></pre>
+            <pre><code>
+
+step action (Counter n)=
+  case action of
+    Increment -> Counter (n + 1)
+    Decrement -> Counter (n - 1)
+
+step Increment (Counter 1) -- Counter 2
+
+step Decrement (Counter 2) -- Counter 1
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>This example is fairly trivial, but the point is that each value of a type can carry data</li>
+                <li>The point is they can hold any data</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Polymorphic Unions</h2>
+            <pre><code class="elm">
+type Maybe a =
+  Just a
+| Nothing
+
+type Either a b =
+  Left a
+| Right b
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>types can carry data with them, and we can parameterize that data</li>
+                <li>Here 'a' is a type variable</li>
+                <li>Maybe a isn't a "concrete" type, it's a like a function waiting for an argument</li>
+                <li>Maybe Int & Maybe Char are concrete types</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Records</h2>
+            <h6>Defining & Accessing</h6>
+            <pre><code class="elm">
+person = { first = "Jane", last = "Smith" }
+
+person.first -- "Jane"
+
+.last person -- "Smith"
+
+List.map .last people -- a list of last names
+
+sayHi { first } =
+  "Hi " ++ first
+
+sayHi person -- "Hi Jane"
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>Records are like objects / hashes in other languages</li>
+                <li>But records in Elm are far more powerful than, say, objects in JS</li>
+                <li>They are also very similar to n-tuples or a sum type containing various values</li>
+                <li>Records, however, come with accessors (which are just functions), provide a more familiar interface</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Records</h2>
+            <h6>Updating</h6>
+            <pre><code class="elm">
+{ person - first } -- removes a field
+
+{ person | age = 20 } -- adds a new field & value
+
+{ person | first <- "John" } -- updates a field
+
+{ person - last | surname = "Smith" }
+-- combine adding & deleting to rename a field
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>Important note here, this is not mutation, data is immutable.</li>
+                <li>Each operation creates a new record, using the source as a template</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Types</h2>
+            <h6>The Part Where Everyone Stops Listening</h6>
+            <aside class="notes">
+              <ul>
+                <li>The idea of a statically typed languages turns a lot of people off</li>
+                <li>But notice that none of the previous examples have type annotations</li>
+                <li>Yet each expression has a type and is statically checked at compile time</li>
+                <li>Elms type inference sorts all of that out</li>
+                <li>You don't NEED to annotate your code, but you should.</li>
+                <li>Types can help guide an implmentation, and they provide documentation</li>
+              </ul>
+            </aside>
+          </section>
+          <section>
+            <h2>Examples of Types</h2>
+            <pre><code class="elm">
+5 : number
+
+4.5 : Float
+
+"Hi" : String
+
+'c' : Char
+
+Keyboard.presses : Signal Int
+
+person : {first : String, last : String}
+
+add : Int -> Int -> Int
+
+map : (a -> b) -> List a -> List b
+            </code></pre>
+            <aside class="notes">
+              <ul>
+                <li>Numbers in Elm can be a float or an int, but Elm also includes the broader 'number'</li>
+                <li>number is a type that could be a Float or an Int depending on the usage</li>
+                <li>Signals play a HUGE role in Elm. Unfortunately, the topic is too large to get into now</li>
+                <li>The type of a function is a list of argument types, separated by '->'</li>
+                <li>The final type in the signature is the return type</li>
+                <li>Polymorphic functions look like regular functions, except types are replaced by type variables</li>
+                <li>The type variable 'a' will stand for the same type throughout the signature</li>
+                <li>'a' and 'b' CAN be different types, but are not required to be</li>
+              </ul>
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Demo</h2>
+          </section>
+        </section>
+        <section>
+          <h2>Further</h2>
+          <ul>
+            <li><a href="http://elm-lang.org">Elm Lang</a> - Offical Docs</li>
+            <li><a href="https://www.youtube.com/watch?v=1uRC3hmKQnM">Functional Principles in React</a> - Jessica Kerr</li>
+            <li><a href="https://www.youtube.com/watch?v=FV0DXNB94NE">Make the Backend Team Jealous...</a> - Richard Feldman</li>
+            <li><a href="https://www.youtube.com/watch?v=9cIEtC-V2XE&feature=youtu.be&t=2h50m5s">Effects As Data</a> - Richard Feldman</li>
+            <li><a href="https://www.youtube.com/watch?v=oYk8CKH7OhE">Let's Be Mainstream...</a> - Evan Czaplicki</li>
+            <li><a href="https://www.youtube.com/watch?v=Agu6jipKfYw">Controlling Time and Space...</a> - Evan Czaplicki</li>
+            <li><a href="https://devchat.tv/js-jabber/175-jsj-elm-with-evan-czaplicki-and-richard-feldman">Episode 175</a> - JavaScript Jabber</li>
+            <li><a href="http://www.functionalgeekery.com/functional-geekery-episode-33-richard-feldman-and-tessa-kelly/">Episode 33</a> - Functional Geekery</li>
+            <li><a href="https://pragmaticstudio.com/elm">Building Reactive Web Apps</a> - The Pragmatic Studio</li>
+            <li><a href="https://pragmaticstudio.com/elm-signals">Signals, Mailboxes & Ports</a> - The Pragmatic Studio</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Thanks!</h2>
+          <h6><a href="https://twitter.com/thunk_life">@thunk_life</a></h6>
+          <h6><a href="https://thunklife.github.io/elm-talk">https://thunklife.github.io/elm-talk</a></h6>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+     // Full list of configuration options available at:
+     // https://github.com/hakimel/reveal.js#configuration
+     Reveal.initialize({
+       controls: true,
+       progress: true,
+       history: true,
+       center: true,
+
+       transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+       // Optional reveal.js plugins
+       dependencies: [
+         { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+         { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+         { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+         { src: 'plugin/highlight/highlight.js', async: false, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() {
+           hljs.configure({languages: ['Elm']});
+           hljs.initHighlightingOnLoad(); } },
+         { src: 'plugin/zoom-js/zoom.js', async: true },
+         { src: 'plugin/notes/notes.js', async: true }
+       ]
+     });
+
+    </script>
+
+  </body>
+</html>

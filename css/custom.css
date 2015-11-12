@@ -1,0 +1,54 @@
+body {
+  background: #5a6378;
+}
+
+.reveal p,
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5 {
+  color: #7FD13B
+}
+
+.reveal h6 {
+  color: #60b4cc !important;
+}
+
+.reveal ul {
+  margin: 0 0 20px 0;
+  font-family: "Quicksand", sans-serif;
+  font-weight: normal;
+  line-height: 1.2;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+  text-shadow: none;
+  word-wrap: break-word;
+  color: #60b4cc !important;
+}
+
+.reveal ul li {
+  margin-bottom: 10px;
+}
+
+.reveal a {
+  color: #efac00;
+}
+
+.reveal a:hover {
+  text-decoration: underline;
+  color: #efac00;
+}
+
+.reveal ul {
+  list-style-type: none;
+}
+
+.reveal pre {
+  box-shadow: none;
+  border-radius: 2px;
+}
+
+.reveal code {
+  border-radius: 2px;
+}
