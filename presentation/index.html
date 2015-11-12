@@ -44,77 +44,22 @@
         <section>
           <h1>Elm</h1>
           <h6>Typed Functional Programming For The Web</h6>
-        </section>
-        <section>
-          <section>
-            <h2>Let's Talk About JavaScript</h2>
-          </section>
-          <section>
-            <h2>JAVASCRIPT YAY!</h2>
+          <aside class="notes">
             <ul>
-              <li>It's everywhere</li>
-              <li>Super easy to run</li>
-              <li>Simple, but powerful</li>
+              <li>Elm is a language looking to compete to be the next language for the web</li>
+              <li>It's goal is to bring more maintainable development to JavaScript, while being approachable</li>
             </ul>
-            <aside class="notes">
-              <ul>
-                <li>JavaScript is everywhere and there are hundreds of thousands of packages for it</li>
-                <li>All you need to get going, really, is a browser. Pop open devtools and you can run commands in the console</li>
-                <li>Beyond that, todays frameworks and libraries make it dead simple to get an app running</li>
-                <li>The language is pretty simple, but it comes with some powerfule features (functions as first-class values)</li>
-              </ul>
-            </aside>
-          </section>
-          <section>
-            <h2>OMG WTF AYFKM GTFO!</h2>
-            <ul>
-              <li>WTF is equality even</li>
-              <li>MUTABLE ALL THE THINGS</li>
-              <li>Maintenance?</li>
-            </ul>
-            <aside class="notes">
-              <ul>
-                <li>JavaScript is a trainwreck in a lot of ways</li>
-                <li>We could sit a talk about them all night, which is fun, but we've probably all seen the WTFs on twitter or whatever</li>
-              </ul>
-            </aside>
-          </section>
-          <section>
-            <h2>JavaScript is improving</h2>
-            <ul>
-              <li>ES 2015 & beyond</li>
-              <li>"Best practices" are being challenged</li>
-              <li>Maintenance issues are being addressed</li>
-            </ul>
-            <aside class="notes">
-              <ul>
-                <li>The language is improving, and getting some much needed TLC</li>
-                <li>Things like two-way binding and property observation are being phased out thank in no small part to React</li>
-                <li>Libraries like immutable.js and React, as well as tools like Flow are trying to change how we approach JavaScript to make it more manageable</li>
-              </ul>
-            </aside>
-          </section>
-          <section>
-            <h2>But it's still JavaScript</h2>
-            <h6>For better or for worse</h6>
-            <aside class="notes">
-              <ul>
-                <li>As more features are added to the language, and libraries add things like types does it make sense to look at other languages</li>
-              </ul>
-            </aside>
-          </section>
-          <section>
-            <h2>Enter Elm</h2>
-            <aside class="notes">
-              <ul>
-                <li>Elm is a typed, functional language that compiles to HTML and JavaScript</li>
-                <li>It is a language that has a lot of the concepts that JavaScript is just coming around to baked right in: immutability, reactivity, types, unidirectional data-flow</li>
-              </ul>
-          </section>
+          </aside>
         </section>
         <section>
           <section>
             <h2>Why Choose Elm?</h2>
+            <aside class="notes">
+              <ul>
+                <li>Of course there are plenty of of options for comile to JS langs</li>
+                <li>So why choose Elm</li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h2>Purity</h2>
@@ -140,33 +85,12 @@
             </aside>
           </section>
           <section>
-            <h2>Reactivity</h2>
-            <aside class="notes">
-              <ul>
-                <li>Inputs to the system are encoded as Signal types</li>
-                <li>Signals are values over time, and we transform those signals like we do collections. RxJS, BaconJS, etc</li>
-                <li>Again, it's very clear from the type which functions interact with signals</li>
-              </ul>
-            </aside>
-          </section>
-          <section>
             <h2>Designed For Frontend</h2>
             <aside class="notes">
               <ul>
                 <li>Elm is designed to bring FP to FE devs, not FP devs to the Frontend</li>
                 <li>It eschews concepts that exist in other Functional Langs (like Haskell)</li>
                 <li>Concepts like Signals are key to the language, but pacakges are available to abstract that away</li>
-              </ul>
-            </aside>
-          </section>
-          <section>
-            <h2>Easy to get up and running</h2>
-            <h6>Unless You're On Linux</h6>
-            <aside class="notes">
-              <ul>
-                <li>Easy installers for Windows and Mac</li>
-                <li>Interactive examples to try it out</li>
-                <li>Linux users (like me), have an install path, it's just not as simple</li>
               </ul>
             </aside>
           </section>
@@ -190,49 +114,26 @@
         </section>
         <section>
           <section>
-            <h2>The Elm Language</h2>
-          </section>
-          <section>
-            <h2>Literals & Operators</h2>
-            <pre><code>
-num = 43
-
-flt = 12.3
-
-str = "hello"
-
-char = 'a'
-
-mult =
-"""
-Hello
-World
-"""
-            </code></pre>
-            <pre><code>
-1 + 1
-
-"Hello" ++ "World"
-
-True && False
-            </code></pre>
+            <h2>Elm Syntax</h2>
+            <h6>Crash Course</h6>
+            <aside class="notes">
+              <ul>
+                <li>Elm is an ML style language, like Haskell.</li>
+                <li>It can seem a littl strange at first, so here's a crash course</li>
+              </ul>
           </section>
           <section>
             <h2>Functions</h2>
-            <h6>The Basics</h6>
             <pre><code>
 add x y = x + y
 
 add 10 11 -- 21
 
-add 10    -- returns a function that has its first argument fixed to 10
-
 add' = (\x y -> x + y) -- anonymous function
             </code></pre>
           </section>
           <section>
-            <h2>Functions</h2>
-            <h6>Pattern Matching</h6>
+            <h2>Pattern Matching</h2>
             <pre><code>
 or b1 b2 =
   case b1 of
@@ -241,8 +142,7 @@ or b1 b2 =
             </code></pre>
           </section>
           <section>
-            <h2>Functions</h2>
-            <h6>Let</h6>
+            <h6>Let...In</h6>
             <pre><code>
 f x =
   let
@@ -257,27 +157,6 @@ f x =
             </aside>
           </section>
           <section>
-            <h2>Notes On Functions</h2>
-            <pre><code>
-(<<>>) x y = x + y
-
-3 <<>> 3
-
-(<<>>) 3 3
-
-(+) 3 3
-
-add 3 3
-
-3 `add` 3</code></pre>
-            <aside class="notes">
-              <ul>
-                <li>Operators are just functions, you can make your own</li>
-                <li>Functions and operators can be used prefix or infix</li>
-              </ul>
-            </aside>
-          </section>
-          <section>
             <h2>Lists</h2>
             <pre><code>
 xs = [1, 2, 3]
@@ -288,10 +167,6 @@ head xs
   case xs of
     x::xs -> Just x
     []    -> Nothing
-
-List.map (\x -> x + 1) xs
-
-List.map ((+) 1) xs
             </code></pre>
           </section>
           <section>
@@ -299,12 +174,6 @@ List.map ((+) 1) xs
             <pre><code>
 t = (1, "Foo")
 t' = (2, "Bar", [1, 2, 3])
-
-fst t -- 1
-snd t' -- "Bar"
-
-(,) 1 2
-(, ,) 1 2 3
             </code></pre>
           </section>
           <section>
@@ -323,11 +192,10 @@ calc action n m=
 calc Add 1 2 -- 3
 
 calc Sub 5 3 -- 2
-
             </code></pre>
             <aside class="notes">
               <ul>
-                <li>Unions are like, enums in other languages, but have more power as we'll see later</li>
+                <li>Unions are like enums in other languages, but have more power as we'll see later</li>
               </ul>
             </aside>
           </section>
@@ -365,14 +233,7 @@ step Decrement (Counter 2) -- Counter 1
 type Maybe a =
   Just a
 | Nothing
-            </code></pre>
-            <pre><code>
-head xs =
-  case xs of
-    x::xs = Just x
-    [] = Nothing
-            </code></pre>
-            <pre><code>
+
 type Either a b = Left a | Right b
             </code></pre>
             <aside class="notes">
@@ -445,8 +306,7 @@ sayHi person -- "Hi Jane"
             </aside>
           </section>
           <section>
-            <h2>Types</h2>
-            <h6>Values</h6>
+            <h2>Examples of Types</h2>
             <pre><code class="elm">
 5 : number
 
@@ -456,87 +316,24 @@ sayHi person -- "Hi Jane"
 
 'c' : Char
 
-Increment : Action
-
-Just "Hi" : Maybe String
-
 Keyboard.presses : Signal Int
 
 person : {first : String, last : String}
+
+add : Int -> Int -> Int
+
+map : (a -> b) -> List a -> List b
             </code></pre>
             <aside class="notes">
               <ul>
                 <li>Numbers in Elm can be a float or an int, but Elm also includes the broader 'number'</li>
                 <li>number is a type that could be a Float or an Int depending on the usage</li>
                 <li>Signals play a HUGE role in Elm. Unfortunately, the topic is too large to get into now</li>
-              </ul>
-            </aside>
-          </section>
-          <section>
-            <h2>Types</h2>
-            <h6>Functions</h6>
-            <pre><code>
-add : Int -> Int -> Int
-
-add3 : Int -> Int -> Int -> Int
-
-intMap : (Int -> Int) -> List Int -> List Int
-
--- Because Currying
-
-add : Int -> (Int -> Int)
-
-add3 : Int -> (Int -> (Int -> Int))
-
-intMap : (Int -> Int) -> (List Int -> List Int)
-            </code></pre>
-            <aside class="notes">
-              <ul>
                 <li>The type of a function is a list of argument types, separated by '->'</li>
                 <li>The final type in the signature is the return type</li>
-                <li>Functions in Elm are curried</li>
-                <li>Each function takes one argument and returns a new function of one argument</li>
-                <li>The paranthesis help illustrate that point. For each argument</li>
-                <li>They also show an interesting way to look at map</li>
-                <li>map is really a function that takes a function which works on a single value</li>
-                <li>And turns it into a function that works on a list of values</li>
-              </ul>
-            </aside>
-          </section>
-          <section>
-            <h2>Types</h2>
-            <h6>Polymorphic Functions</h6>
-            <pre><code>
-id : a -> a
-
-List.map : (a -> b) -> List a -> List b
-
-(::) : a -> List a -> List a
-            </code></pre>
-            <aside class="notes">
-              <ul>
                 <li>Polymorphic functions look like regular functions, except types are replaced by type variables</li>
                 <li>The type variable 'a' will stand for the same type throughout the signature</li>
                 <li>'a' and 'b' CAN be different types, but are not required to be</li>
-              </ul>
-          </section>
-          <section>
-            <h2>Type Aliases</h2>
-            <pre><code>
-type alias Text = String
-
-type alias Size = Int
-
-type alias Name = { first : String, last : String }
-
-type alias Person = { name: Name, age: Int }
-
-type alias Named a = { a | name : Name }
-            </code></pre>
-            <aside class="notes">
-              <ul>
-                <li>Aliases give us a way to provide contextual names to our types</li>
-                <li>They do not create a new type however</li>
               </ul>
             </aside>
           </section>
