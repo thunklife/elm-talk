@@ -184,7 +184,7 @@ type Action =
 | Sub
             </code></pre>
             <pre><code>
-calc action n m=
+calc action n m =
   case action of
     Add -> n + m
     Sub -> n - m
@@ -234,7 +234,9 @@ type Maybe a =
   Just a
 | Nothing
 
-type Either a b = Left a | Right b
+type Either a b =
+  Left a
+| Right b
             </code></pre>
             <aside class="notes">
               <ul>
@@ -340,7 +342,7 @@ map : (a -> b) -> List a -> List b
         </section>
         <section>
           <section>
-            <h2>Examples</h2>
+            <h2>Demo</h2>
           </section>
         </section>
         <section>
